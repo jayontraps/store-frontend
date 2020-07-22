@@ -1,22 +1,60 @@
 import React from "react"
-import { Link } from "gatsby"
-
+import { graphql, useStaticQuery } from "gatsby"
+import styled from "@emotion/styled"
+import { isMobile } from "react-device-detect"
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import Collections from "../components/Collections"
+import Hero from "../components/Hero"
+import LeadModule from "../components/LeadModule"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const vhValue = isMobile ? 80 : 94
+
+const Container = styled.div`
+  min-height: 100vh;
+  overflow-y: hidden;
+  width: 100vw;
+  position: relative;
+  z-index: 9999;
+  background-color: ${({ theme }) => theme.colors.bgColor};
+`
+
+const IndexPage = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      image1: file(relativePath: { eq: "images-full-screen-4.jpg" }) {
+        sharp: childImageSharp {
+          fluid(maxWidth: 1800) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      image2: file(relativePath: { eq: "images-full-screen-6-cropped.png" }) {
+        sharp: childImageSharp {
+          fluid(maxWidth: 1800) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+  `)
+
+  return (
+    <Layout withHero isHomePage>
+      <SEO title="Home" />
+      <Hero isHomePage {...{ vhValue }} image={data.image1.sharp.fluid} />
+      <Container>
+        <LeadModule
+          image={data.image2.sharp.fluid}
+          title="Handmade vintage flavour hipster retro maps Minim ullamco"
+          intro="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              officiis incidunt officia, aliquid beatae reiciendis doloribus
+              consequuntur voluptas similique inventore molestias."
+        />
+        <Collections />
+      </Container>
+    </Layout>
+  )
+}
 
 export default IndexPage

@@ -1,18 +1,21 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
+import { Global } from "@emotion/core"
+import styled from "@emotion/styled"
+import globalStyles from "../theme/global"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import Header from "./Header/header.js"
+import Footer from "./Footer/footer"
+import { PageTransition } from "./react-spring-animation"
 
-import Header from "./header"
-import "./layout.css"
+const StyledLayout = styled.div`
+  min-height: 100vh;
+  padding-top: ${({ withHero }) => (withHero ? "0px" : "60px")};
+  width: 100vw;
+  background-color: ${({ theme }) => theme.colors.bgColor};
+`
 
-const Layout = ({ children }) => {
+const Layout = ({ children, withHero = false, isHomePage = false }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -25,21 +28,15 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      <Global styles={globalStyles} />
+      <Header
+        {...{ withHero, isHomePage }}
+        siteTitle={data.site.siteMetadata.title}
+      />
+      <PageTransition>
+        <StyledLayout withHero={withHero}>{children}</StyledLayout>
+        <Footer />
+      </PageTransition>
     </>
   )
 }
