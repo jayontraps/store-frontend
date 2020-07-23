@@ -52,7 +52,7 @@ const Cart = ({ style, setCartOpen }) => {
           <CloseIcon />
         </button>
 
-        {cart.length > 0 ? (
+        {cart.length > 0 && (
           <>
             <div className="cart__line_items">
               {cart.map((item) => (
@@ -80,6 +80,22 @@ const Cart = ({ style, setCartOpen }) => {
                 </span>
               </h5>
 
+              {shouldPayShipping(cart) && (
+                <h5 className="total__title">
+                  Shipping:{" "}
+                  <span className="total__price">
+                    {isLoading ? (
+                      <LoadingSpinner />
+                    ) : (
+                      formatPrice(SHIPPING_RATE)
+                    )}
+                  </span>
+                </h5>
+              )}
+              {!shouldPayShipping(cart) && (
+                <h5 className="total__title">Shipping is free!</h5>
+              )}
+
               <h5 className="total__title">
                 Total:{" "}
                 <span className="total__price">
@@ -101,12 +117,11 @@ const Cart = ({ style, setCartOpen }) => {
                   Checkout
                 </button>
               </div>
-              {showCheckout && <Checkout cart={cart} />}
             </div>
           </>
-        ) : (
-          <p>No items in cart</p>
         )}
+        {showCheckout && <Checkout cart={cart} />}
+        {cart.length < 1 && <p>No items in your cart</p>}
       </StyledCart>
     </animated.div>
   )
