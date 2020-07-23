@@ -1,5 +1,9 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 const path = require("path")
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+const API_URL = process.env.GATSBY_API_URL || "http://localhost:1337"
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const products = await graphql(`
@@ -17,7 +21,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
   products.data.allStrapiProduct.edges.forEach(({ node }) => {
     createPage({
       path: `/product/${node.slug}`,
-      component: path.resolve(`src/templates/product.js`),
+      component: path.resolve(`./src/templates/product.js`),
       context: {
         id: node.id,
       },
@@ -75,7 +79,7 @@ exports.createResolvers = ({
         type: `File`,
         resolve(source, args, context, info) {
           return createRemoteFileNode({
-            url: `http://localhost:1337${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
+            url: `${API_URL}${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
             store,
             cache,
             createNode,
@@ -90,7 +94,7 @@ exports.createResolvers = ({
         type: `File`,
         resolve(source, args, context, info) {
           return createRemoteFileNode({
-            url: `http://localhost:1337${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
+            url: `${API_URL}${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
             store,
             cache,
             createNode,

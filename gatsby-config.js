@@ -1,6 +1,7 @@
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+const API_URL = process.env.GATSBY_API_URL || "http://localhost:1337"
 
 module.exports = {
   siteMetadata: {
@@ -18,7 +19,7 @@ module.exports = {
     {
       resolve: `gatsby-source-strapi`,
       options: {
-        apiURL: process.env.API_URL || "http://localhost:1337",
+        apiURL: API_URL,
         queryLimit: 1000, // Default to 100
         contentTypes: ["product", "range"],
         //If using single types place them in this array.
