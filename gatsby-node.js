@@ -3,7 +3,9 @@ require("dotenv").config({
 })
 const path = require("path")
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
-const API_URL = process.env.GATSBY_API_URL || "http://localhost:1337"
+// const API_URL = process.env.GATSBY_API_URL || "http://localhost:1337"
+const imagePath =
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:1337"
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const products = await graphql(`
@@ -79,7 +81,7 @@ exports.createResolvers = ({
         type: `File`,
         resolve(source, args, context, info) {
           return createRemoteFileNode({
-            url: `${API_URL}${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
+            url: `${imagePath}${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
             store,
             cache,
             createNode,
@@ -94,7 +96,7 @@ exports.createResolvers = ({
         type: `File`,
         resolve(source, args, context, info) {
           return createRemoteFileNode({
-            url: `${API_URL}${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
+            url: `${imagePath}${source.url}`, // for S3 upload. For local: `http://localhost:1337${source.url}`,
             store,
             cache,
             createNode,
