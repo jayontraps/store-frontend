@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import styled from "@emotion/styled"
 import { CartContext } from "../../context/CartContext"
 import LoadingSpinner from "../LoadingSpinner"
@@ -17,20 +17,52 @@ const StyledAddToCartButton = styled.button`
   transition: transform 150ms;
   width: 240px;
   height: 50px;
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.slateTrans};
+  }
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.slateTrans};
+  }
 `
 
-const AddToCart = ({ data, isLoading = false }) => {
+const AddToCart = ({ data }) => {
   const [quantity, setQuantity] = useState(1)
+  const [isLoading, setIsLoading] = useState(false)
+  const [added, setAdded] = useState(false)
   const { addToCart } = useContext(CartContext)
 
+  function add({ data, quantity }) {
+    addToCart(data, quantity)
+    setAdded(true)
+    setIsLoading(true)
+  }
+
+  useEffect(() => {
+    var timeoutID
+    if (isLoading) {
+      timeoutID = setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
+    }
+    return () => {
+      window.clearTimeout(timeoutID)
+    }
+  }, [isLoading])
+
+  const action = added ? "Added" : "Add"
   return (
     <>
       <Quantity {...{ quantity, setQuantity }} />
       <StyledAddToCartButton
         className="button"
-        onClick={() => addToCart(data, quantity)}
+        onClick={() => add({ data, quantity })}
+        disabled={isLoading}
       >
-        {isLoading ? <LoadingSpinner colorModer="light" /> : `Add to basket`}
+        {isLoading ? (
+          <LoadingSpinner colorModer="light" />
+        ) : (
+          `${action} to basket`
+        )}
       </StyledAddToCartButton>
     </>
   )

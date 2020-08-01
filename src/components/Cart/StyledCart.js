@@ -10,12 +10,10 @@ const StyledCart = styled.div`
   background-color: white;
   min-height: 100%;
   overflow: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: relative;
 
   .cart__header {
+    font-size: 1.2rem;
     position: absolute;
     top: 0;
     left: 2rem;
@@ -33,6 +31,10 @@ const StyledCart = styled.div`
     display: flex;
     justify-content: space-between;
   }
+  h3.total__title {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+  }
   .total__price {
     display: inline-block;
     min-width: 50px;
@@ -44,7 +46,7 @@ const StyledCart = styled.div`
     justify-content: center;
     width: 100%;
     ${tabletLandscapeUp} {
-      justify-content: flex-end;
+      justify-content: flex-start;
     }
   }
   .buy_btn {
@@ -52,6 +54,7 @@ const StyledCart = styled.div`
     text-decoration: none;
     background-color: ${({ theme }) => theme.colors.active};
     min-width: 300px;
+    font-weight: bold;
   }
 `
 

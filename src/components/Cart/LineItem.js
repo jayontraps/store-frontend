@@ -10,16 +10,18 @@ const {
 } = theme
 
 const StyledLineItem = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: 100px 60px;
+  ${tabletLandscapeUp} {
+    grid-template-columns: 100px 1fr 160px 60px;
+    grid-template-rows: 1fr;
+  }
+
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.borderColor};
-
-  ${tabletLandscapeUp} {
-    flex-wrap: nowrap;
-  }
 
   .line-item {
     &__col {
@@ -29,15 +31,15 @@ const StyledLineItem = styled.div`
     }
 
     &__details {
-      width: 50%;
+      width: 40%;
       margin-bottom: 2rem;
       ${tabletLandscapeUp} {
-        width: 40%;
+        width: 30%;
         margin-bottom: 0rem;
       }
     }
 
-    &__price {
+    &__quantity {
     }
 
     &__subtotal {
@@ -45,7 +47,12 @@ const StyledLineItem = styled.div`
     }
 
     &__img {
-      max-width: 120px;
+      max-width: 100px;
+    }
+
+    &__subtotal {
+      display: block;
+      text-align: right;
     }
 
     &__remove {
@@ -75,7 +82,7 @@ const LineItem = ({ isLoading, item }) => {
         />
       </div>
       <div className="line-item__col line-item__details">
-        <h4 className="line-item__title">{item.title}</h4>
+        <h4 className="line-item__title">{item.name}</h4>
         <div className="line-item__price">{formatPrice(item.price)}</div>
         <button
           className="line-item__remove button"
@@ -84,7 +91,7 @@ const LineItem = ({ isLoading, item }) => {
           Remove{" "}
         </button>
       </div>
-      <div className="line-item__col">
+      <div className="line-item__col line-item__quantity">
         <Quantity
           showTitle={false}
           quantity={item.qty}

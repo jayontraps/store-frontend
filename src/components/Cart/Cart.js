@@ -6,7 +6,6 @@ import { CartContext } from "../../context/CartContext"
 import LineItem from "./LineItem"
 import StyledCart from "./StyledCart"
 import { useScrollFreeze } from "../../hooks"
-import Coupon from "./Coupon"
 import LoadingSpinner from "../LoadingSpinner"
 import { formatPrice } from "../../utils/formatPrice"
 import {
@@ -16,6 +15,7 @@ import {
   SHIPPING_RATE,
 } from "../../utils/cart"
 import Checkout from "../Checkout"
+import { SpringLink } from "../react-spring-animation"
 
 const Cart = ({ style, setCartOpen }) => {
   const [showCheckout, setShowCheckout] = useState(false)
@@ -37,7 +37,7 @@ const Cart = ({ style, setCartOpen }) => {
     >
       <StyledCart>
         <div className="cart__header">
-          <h3 className="title">Your cart</h3>
+          <h3 className="title">Your basket</h3>
         </div>
         <button
           style={{
@@ -96,7 +96,7 @@ const Cart = ({ style, setCartOpen }) => {
                 <h5 className="total__title">Shipping is free!</h5>
               )}
 
-              <h5 className="total__title">
+              <h3 className="total__title">
                 Total:{" "}
                 <span className="total__price">
                   {isLoading ? (
@@ -105,23 +105,29 @@ const Cart = ({ style, setCartOpen }) => {
                     formatPrice(cartTotal(cart))
                   )}
                 </span>
-              </h5>
+              </h3>
 
               <div className="buy_btn_wrapper">
-                <button
+                {/* <button
                   onClick={() => {
                     setShowCheckout(true)
                   }}
                   className="buy_btn button btn_icon"
                 >
                   Checkout
-                </button>
+                </button> */}
+                <SpringLink
+                  to={"/checkout"}
+                  className="buy_btn button btn_icon"
+                >
+                  Continue to checkout
+                </SpringLink>
               </div>
             </div>
           </>
         )}
         {showCheckout && <Checkout cart={cart} />}
-        {cart.length < 1 && <p>No items in your cart</p>}
+        {cart.length < 1 && <p>No items in your basket</p>}
       </StyledCart>
     </animated.div>
   )

@@ -5,7 +5,7 @@
  */
 export const formatPrice = (priceWithDecimals) => {
   if (!priceWithDecimals) {
-    return "Please add a product to cart"
+    return null
   }
 
   const realPrice = parseInt(priceWithDecimals) / 100

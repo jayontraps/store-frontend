@@ -77,6 +77,9 @@ const StyledHeader = styled.header`
   .cart_toggle__btn {
     position: relative;
     padding: 0.5rem;
+    &:hover {
+      cursor: pointer;
+    }
     .cart_toggle__quantity {
       position: absolute;
       top: -8px;

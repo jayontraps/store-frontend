@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react"
 import styled from "@emotion/styled"
 import { graphql } from "gatsby"
-import Img from "gatsby-image"
 import {
   Magnifier,
   SideBySideMagnifier,
@@ -9,10 +8,8 @@ import {
   TOUCH_ACTIVATION,
 } from "react-image-magnifiers"
 import AddToCart from "../components/Cart/AddToCart"
-import { SpringLink } from "../components/react-spring-animation"
 import Layout from "../components/layout"
 import { formatPrice } from "../utils/formatPrice"
-import { CartContext } from "../context/CartContext"
 import theme from "../theme/theme"
 
 const {
@@ -23,6 +20,7 @@ const StyledProduct = styled.div`
   width: calc(100% - 2rem);
   max-width: ${({ theme }) => theme.layout.maxWidth};
   margin: 0 auto;
+  padding-top: 2rem;
   padding-bottom: ${({ theme }) => theme.spacing.section};
 
   img {
@@ -112,19 +110,6 @@ const StyledThumbnailNav = styled.nav`
   }
 `
 
-const StyledCollectionLink = styled.div`
-  width: calc(100% - 2rem);
-  max-width: ${({ theme }) => theme.layout.maxWidth};
-  ${small} {
-    margin: 1rem auto;
-  }
-  margin: ${({ theme }) => theme.spacing.gridGap} auto;
-  .collection-link {
-    color: ${({ theme }) => theme.colors.primary};
-    text-decoration: none;
-  }
-`
-
 const ProductTemplate = ({ data: { strapiProduct: data } }) => {
   const {
     name,
@@ -133,8 +118,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
     images,
     images: [firstImage],
   } = data
-  const [qty, setQty] = useState(1)
-  const { addToCart } = useContext(CartContext)
+
   const firstSet = {
     small: firstImage.imageFile.childImageSharp.small.src,
     large: firstImage.imageFile.childImageSharp.large.src,
@@ -144,23 +128,6 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
 
   return (
     <Layout>
-      {/* <h1>{name}</h1>
-      <p>{description}</p>
-      <p>{formatPrice(price)}</p>
-      <Img backgroundColor fluid={fluid} />
-
-      <input
-        type="number"
-        value={qty}
-        onChange={(event) => setQty(event.target.value)}
-      />
-      <button
-        onClick={() => addToCart(data, qty)}
-        style={{ fontSize: "20px", padding: "24px", borderRadius: "2px" }}
-      >
-        Add To Cart
-      </button> */}
-
       <StyledProduct className="product">
         <div className="column product__images">
           <div className="main__image">

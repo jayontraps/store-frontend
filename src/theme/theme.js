@@ -37,6 +37,12 @@ const theme = {
     dark_blue: "#053551",
     red: "#410C12",
     pink: "#CE917E",
+    checkout: {
+      bgColor: "rgba(255, 255, 255, 0.4)", // #7795f8
+      placeholder: "rgba(0, 0, 0, 0.25)", // #7795f8
+      border: "rgba(0, 0, 0, 0.25)", // #7795f8
+      label: "#17181A",
+    },
   },
   fonts: {
     family: `Raleway, "Segoe UI", Roboto,

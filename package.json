@@ -13,6 +13,7 @@
     "@stripe/stripe-js": "^1.8.0",
     "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
+    "formik": "^2.1.5",
     "gatsby": "^2.13.53",
     "gatsby-background-image": "^1.1.1",
     "gatsby-cli": "^2.12.60",
