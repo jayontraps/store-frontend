@@ -1,8 +1,9 @@
 import React from "react"
 import { navigate } from "gatsby-link"
 import styled from "@emotion/styled"
+import { ErrorMessage, Field, Form, Formik } from "formik"
 
-const StyledContactForm = styled.form`
+const StyledContactForm = styled.div`
   fieldset {
     appearance: none;
     border: none;
@@ -19,7 +20,7 @@ const StyledContactForm = styled.form`
     padding: 10px;
   }
   label {
-    text-indent: -999rem;
+    /* text-indent: -999rem; */
   }
 `
 
@@ -30,78 +31,95 @@ function encode(data) {
 }
 
 export default function ContactForm() {
-  const [state, setState] = React.useState({})
-
-  const handleChange = (e) => {
-    setState({ ...state, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const form = e.target
+  const handleSubmit = async (values, { setSubmitting }) => {
+    console.log("values: ", values)
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
-        "form-name": form.getAttribute("name"),
-        ...state,
+        "form-name": "contact",
+        ...values,
       }),
     })
-      .then(() => navigate(form.getAttribute("action")))
+      .then(() => setSubmitting(false))
+      .then(() => navigate("/thanks/"))
       .catch((error) => alert(error))
   }
 
   return (
-    <StyledContactForm
-      name="contact"
-      method="post"
-      action="/thanks/"
-      data-netlify="true"
-      data-netlify-honeypot="bot-field"
-      onSubmit={handleSubmit}
+    <Formik
+      initialValues={{
+        "bot-field": "",
+        "form-name": "contact",
+        email: "",
+        name: "",
+        message: "",
+      }}
+      validate={(values) => {
+        const errors = {}
+        const requiredFields = ["email", "name", "message"]
+        requiredFields.forEach((field) => {
+          if (!values[field]) {
+            errors[field] = "Required field"
+          }
+        })
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+          errors.email = "Invalid email address"
+        }
+        return errors
+      }}
+      onSubmit={(values, { setSubmitting }) => {
+        handleSubmit(values, { setSubmitting })
+      }}
     >
-      {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-      <input type="hidden" name="form-name" value="contact" />
-      <p hidden>
-        <label>
-          Don’t fill this out:{" "}
-          <input name="bot-field" onChange={handleChange} />
-        </label>
-      </p>
-      <fieldset className="field">
-        <label>
-          <input
-            placeholder="Your name"
-            type="text"
-            name="name"
-            onChange={handleChange}
-          />
-        </label>
-      </fieldset>
-      <fieldset className="field">
-        <label>
-          <input
-            placeholder="Your email"
-            type="email"
-            name="email"
-            onChange={handleChange}
-          />
-        </label>
-      </fieldset>
-      <fieldset className="field">
-        <label>
-          <textarea
-            placeholder="Your message"
-            name="message"
-            onChange={handleChange}
-          />
-        </label>
-      </fieldset>
-      <p>
-        <button className="button contact_form_btn" type="submit">
-          Send
-        </button>
-      </p>
-    </StyledContactForm>
+      <Form
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        data-netlify-recaptcha="true"
+        name="contact"
+        action="/thanks/"
+        noValidate
+      >
+        <StyledContactForm>
+          <Field type="hidden" name="bot-field" />
+          <Field type="hidden" name="form-name" />
+          <fieldset className="field">
+            <label>
+              <Field placeholder="Your name" type="text" name="name" />
+            </label>
+            <ErrorMessage name="name" component="div" className="error-msg" />
+          </fieldset>
+          <fieldset className="field">
+            <label>
+              <Field placeholder="Your email" type="email" name="email" />
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="error-msg"
+              />
+            </label>
+          </fieldset>
+          <fieldset className="field">
+            <label>
+              <Field
+                component="textarea"
+                placeholder="Your message"
+                name="message"
+              />
+            </label>
+            <ErrorMessage
+              name="message"
+              component="div"
+              className="error-msg"
+            />
+          </fieldset>
+          <p>
+            <button className="button contact_form_btn" type="submit">
+              Send
+            </button>
+          </p>
+        </StyledContactForm>
+      </Form>
+    </Formik>
   )
 }
