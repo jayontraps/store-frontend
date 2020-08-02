@@ -116,13 +116,13 @@ const Event = ({ event }) => {
 }
 
 const Content = () => {
-  const [showForm, setShowForm] = useState(false)
-  const transitions = useTransition(!showForm, null, {
+  const [showEvents, setShowEvents] = useState(false)
+  const eventsTransitions = useTransition(showEvents, null, {
     from: { opacity: 0, transform: "translate(-50%, -50%) scale(0.8)" },
     enter: { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
     leave: { opacity: 0, transform: "translate(-50%, -50%) scale(0.8)" },
   })
-  const overlayTransitions = useTransition(showForm, null, {
+  const overlayTransitions = useTransition(!showEvents, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -131,25 +131,25 @@ const Content = () => {
   return (
     <>
       <StyledContent>
-        {transitions.map(({ item, key, props }) =>
+        {eventsTransitions.map(({ item, key, props }) =>
           item ? (
             <animated.div
               key={key}
               style={props}
               className="container content__events"
             >
+              <button
+                onClick={() => setShowEvents(false)}
+                className="close_panel button"
+              >
+                <CloseIcon />
+              </button>
               <h1>Past events</h1>
               <ul>
                 {events.map((event, i) => (
                   <Event key={`event-${i}`} {...{ event }} />
                 ))}
               </ul>
-              <button
-                onClick={() => setShowForm(true)}
-                className="button contact_form_btn"
-              >
-                Say hello
-              </button>
             </animated.div>
           ) : (
             <animated.div
@@ -157,15 +157,14 @@ const Content = () => {
               style={props}
               className="container content__contact"
             >
-              <button
-                onClick={() => setShowForm(false)}
-                className="close_panel button"
-              >
-                <CloseIcon />
-              </button>
-
               <h1>Contact us</h1>
               <ContactForm />
+              {/* <button
+                onClick={() => setShowEvents(true)}
+                className="button contact_form_btn"
+              >
+                Events list
+              </button> */}
             </animated.div>
           )
         )}
