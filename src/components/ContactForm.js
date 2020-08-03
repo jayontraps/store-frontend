@@ -81,6 +81,13 @@ const ContactForm = () => {
           netlify-honeypot="bot-field"
           data-netlify-recaptcha={true}
         >
+          {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+          <input type="hidden" name="form-name" value="contact" />
+          <p hidden>
+            <label>
+              Don’t fill this out: <input name="bot-field" />
+            </label>
+          </p>
           <fieldset className="field">
             <Field type="text" placeholder="Your name" name="name" />
             <ErrorMessage component="div" className="error-msg" name="name" />
