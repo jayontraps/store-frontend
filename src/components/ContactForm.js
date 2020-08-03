@@ -43,14 +43,12 @@ const ContactForm = () => {
           message: "",
         }}
         onSubmit={(values, actions) => {
-          console.log(encode({ "form-name": "contact", ...values }))
           fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode({ "form-name": "contact", ...values }),
+            body: encode({ "form-name": "contact-form", ...values }),
           })
             .then(() => {
-              actions.setSubmitting(false)
               actions.resetForm()
             })
             .then(() => {
@@ -58,6 +56,9 @@ const ContactForm = () => {
             })
             .catch((error) => {
               console.log("Error: ", error)
+            })
+            .finally(() => {
+              actions.setSubmitting(false)
             })
         }}
         validate={(values) => {
@@ -76,13 +77,12 @@ const ContactForm = () => {
         }}
       >
         <Form
-          name="contact"
+          name="contact-form"
           data-netlify={true}
           netlify-honeypot="bot-field"
-          data-netlify-recaptcha={true}
         >
           {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
-          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="form-name" value="contact-form" />
           <p hidden>
             <label>
               Don’t fill this out: <input name="bot-field" />
