@@ -103,6 +103,7 @@ const ContactForm = () => {
               placeholder="Your message"
               name="message"
               component="textarea"
+              rows={6}
             />
             <ErrorMessage
               component="div"
