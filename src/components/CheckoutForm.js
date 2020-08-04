@@ -186,9 +186,7 @@ const CheckoutForm = () => {
       setLoading(false)
       setSubmitting(false)
       setSuccess(false)
-      console.log("stripe: ", stripe)
-      // console.log("isSubmitting: ", isSubmitting)
-
+      // console.log("stripe: ", stripe)
       return
     }
 
@@ -252,201 +250,206 @@ const CheckoutForm = () => {
         position: "relative",
       }}
     >
-      {!success && (
+      {!success && cart.length < 1 && <p>No items in your basket</p>}
+      {!success && cart.length > 0 && (
         <>
           <h3 className="title">Total to pay: {formatPrice(total)}</h3>
           <h4>Your contact details:</h4>
+          <Formik
+            initialValues={{
+              email: "",
+              shipping_name: "",
+              shipping_address: "",
+              shipping_state: "",
+              shipping_country: "",
+              shipping_zip: "",
+            }}
+            validate={(values) => {
+              const errors = {}
+              const requiredFields = [
+                "email",
+                "shipping_name",
+                "shipping_address",
+                "shipping_state",
+                "shipping_country",
+                "shipping_zip",
+              ]
+              requiredFields.forEach((field) => {
+                if (!values[field]) {
+                  errors[field] = "Required field"
+                }
+              })
+              if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+              ) {
+                errors.email = "Invalid email address"
+              }
+              return errors
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              handleSubmit(values, { setSubmitting })
+            }}
+          >
+            {({ isSubmitting }) => (
+              <Form>
+                <fieldset className="FormGroup">
+                  <StyledRow>
+                    <div className="FormRow">
+                      <label className="FormRowLabel" htmlFor="shipping_name">
+                        Name
+                      </label>
+                      <Field
+                        className="FormRowInput"
+                        id="shipping_name"
+                        type="text"
+                        name="shipping_name"
+                        placeholder="Jane Doe"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="shipping_name"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </StyledRow>
+
+                  <StyledRow>
+                    <div className="FormRow">
+                      <label className="FormRowLabel" htmlFor="email">
+                        Email
+                      </label>
+                      <Field
+                        className="FormRowInput"
+                        id="email"
+                        type="email"
+                        name="email"
+                        placeholder="janedoe@gmail.com"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </StyledRow>
+                </fieldset>
+
+                <h4>Your shipping details:</h4>
+
+                <fieldset className="FormGroup">
+                  <StyledRow>
+                    <div className="FormRow">
+                      <label
+                        className="FormRowLabel"
+                        htmlFor="shipping_address"
+                      >
+                        Address
+                      </label>
+                      <Field
+                        className="FormRowInput"
+                        id="shipping_address"
+                        type="text"
+                        name="shipping_address"
+                        placeholder="Enter your address"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="shipping_address"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </StyledRow>
+
+                  <StyledRow>
+                    <div className="FormRow">
+                      <label className="FormRowLabel" htmlFor="shipping_state">
+                        City
+                      </label>
+                      <Field
+                        className="FormRowInput"
+                        id="shipping_state"
+                        type="text"
+                        name="shipping_state"
+                        placeholder="Enter your city"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="shipping_state"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </StyledRow>
+
+                  <StyledRow>
+                    <div className="FormRow">
+                      <label
+                        className="FormRowLabel"
+                        htmlFor="shipping_country"
+                      >
+                        Country
+                      </label>
+                      <Field
+                        className="FormRowInput"
+                        id="shipping_country"
+                        type="text"
+                        name="shipping_country"
+                        placeholder="Enter your country"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="shipping_country"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </StyledRow>
+
+                  <StyledRow>
+                    <div className="FormRow">
+                      <label className="FormRowLabel" htmlFor="shipping_zip">
+                        Post Code
+                      </label>
+                      <Field
+                        className="FormRowInput"
+                        id="shipping_zip"
+                        type="text"
+                        name="shipping_zip"
+                        placeholder="Enter your post code"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="shipping_zip"
+                      component="div"
+                      className="error-msg"
+                    />
+                  </StyledRow>
+                </fieldset>
+
+                <fieldset className="FormGroup card-options">
+                  <div className="FormRow">
+                    <CardElement options={CARD_OPTIONS} />
+                  </div>
+                </fieldset>
+
+                <button
+                  className="button buy_btn"
+                  type="submit"
+                  disabled={!stripe || isSubmitting}
+                >
+                  {loading ? <LoadingSpinner /> : `Pay ${formatPrice(total)}`}
+                </button>
+              </Form>
+            )}
+          </Formik>
         </>
       )}
-
-      {!success && (
-        <Formik
-          initialValues={{
-            email: "",
-            shipping_name: "",
-            shipping_address: "",
-            shipping_state: "",
-            shipping_country: "",
-            shipping_zip: "",
-          }}
-          validate={(values) => {
-            const errors = {}
-            const requiredFields = [
-              "email",
-              "shipping_name",
-              "shipping_address",
-              "shipping_state",
-              "shipping_country",
-              "shipping_zip",
-            ]
-            requiredFields.forEach((field) => {
-              if (!values[field]) {
-                errors[field] = "Required field"
-              }
-            })
-            if (
-              !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-            ) {
-              errors.email = "Invalid email address"
-            }
-            return errors
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            handleSubmit(values, { setSubmitting })
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <fieldset className="FormGroup">
-                <StyledRow>
-                  <div className="FormRow">
-                    <label className="FormRowLabel" htmlFor="shipping_name">
-                      Name
-                    </label>
-                    <Field
-                      className="FormRowInput"
-                      id="shipping_name"
-                      type="text"
-                      name="shipping_name"
-                      placeholder="Jane Doe"
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="shipping_name"
-                    component="div"
-                    className="error-msg"
-                  />
-                </StyledRow>
-
-                <StyledRow>
-                  <div className="FormRow">
-                    <label className="FormRowLabel" htmlFor="email">
-                      Email
-                    </label>
-                    <Field
-                      className="FormRowInput"
-                      id="email"
-                      type="email"
-                      name="email"
-                      placeholder="janedoe@gmail.com"
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="error-msg"
-                  />
-                </StyledRow>
-              </fieldset>
-
-              <h4>Your shipping details:</h4>
-
-              <fieldset className="FormGroup">
-                <StyledRow>
-                  <div className="FormRow">
-                    <label className="FormRowLabel" htmlFor="shipping_address">
-                      Address
-                    </label>
-                    <Field
-                      className="FormRowInput"
-                      id="shipping_address"
-                      type="text"
-                      name="shipping_address"
-                      placeholder="Enter your address"
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="shipping_address"
-                    component="div"
-                    className="error-msg"
-                  />
-                </StyledRow>
-
-                <StyledRow>
-                  <div className="FormRow">
-                    <label className="FormRowLabel" htmlFor="shipping_state">
-                      City
-                    </label>
-                    <Field
-                      className="FormRowInput"
-                      id="shipping_state"
-                      type="text"
-                      name="shipping_state"
-                      placeholder="Enter your city"
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="shipping_state"
-                    component="div"
-                    className="error-msg"
-                  />
-                </StyledRow>
-
-                <StyledRow>
-                  <div className="FormRow">
-                    <label className="FormRowLabel" htmlFor="shipping_country">
-                      Country
-                    </label>
-                    <Field
-                      className="FormRowInput"
-                      id="shipping_country"
-                      type="text"
-                      name="shipping_country"
-                      placeholder="Enter your country"
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="shipping_country"
-                    component="div"
-                    className="error-msg"
-                  />
-                </StyledRow>
-
-                <StyledRow>
-                  <div className="FormRow">
-                    <label className="FormRowLabel" htmlFor="shipping_zip">
-                      Post Code
-                    </label>
-                    <Field
-                      className="FormRowInput"
-                      id="shipping_zip"
-                      type="text"
-                      name="shipping_zip"
-                      placeholder="Enter your post code"
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="shipping_zip"
-                    component="div"
-                    className="error-msg"
-                  />
-                </StyledRow>
-              </fieldset>
-
-              <fieldset className="FormGroup card-options">
-                <div className="FormRow">
-                  <CardElement options={CARD_OPTIONS} />
-                </div>
-              </fieldset>
-
-              <button
-                className="button buy_btn"
-                type="submit"
-                disabled={!stripe || isSubmitting}
-              >
-                {loading ? <LoadingSpinner /> : `Pay ${formatPrice(total)}`}
-              </button>
-            </Form>
-          )}
-        </Formik>
-      )}
-      {cardIsInvalid && !success && (
+      {!success && cardIsInvalid && (
         <p className="invalid">{`${cardIsInvalid} Please try again.`}</p>
       )}
       {success && order && (
         <div className="success-msg">
           <h2>Your order was successfully processed.</h2>
           <h4>{`Your order number is ${order.customer_order_id}.`}</h4>
+          <p>{`A confirmation email has been sent to ${order.email}.`}</p>
         </div>
       )}
     </StyledContainer>

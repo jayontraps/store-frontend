@@ -21,6 +21,7 @@ const globalStyles = () => {
       font-size: 15px;
       line-height: 1.4;
       font-family: ${fonts.family};
+      background-color: ${colors.bgColor};
     }
 
     h1 {

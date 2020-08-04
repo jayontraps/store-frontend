@@ -21,7 +21,8 @@ const StyledContent = styled.div`
     z-index: 9;
     top: 50%;
     left: 50%;
-    width: 650px;
+    width: 95%;
+    max-width: 650px;
     min-height: 40vh;
     background-color: rgba(255, 255, 255, 0.8);
     padding: 2rem;
@@ -73,10 +74,8 @@ const StyledContent = styled.div`
 const Overlay = ({ style }) => (
   <animated.div
     style={{
-      position: "fixed",
+      position: "absolute",
       zIndex: "3",
-      width: "100vw",
-      height: "100vh",
       top: 0,
       bottom: 0,
       left: 0,

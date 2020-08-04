@@ -9,6 +9,7 @@ import Footer from "./Footer/footer"
 import { PageTransition } from "./react-spring-animation"
 
 const StyledLayout = styled.div`
+  position: relative;
   min-height: 100vh;
   padding-top: ${({ withHero }) => (withHero ? "0px" : "60px")};
   width: 100vw;

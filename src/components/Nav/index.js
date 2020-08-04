@@ -15,7 +15,7 @@ const Nav = () => {
         Stories
       </SpringLink>
       <SpringLink activeClassName="current-page" to="/contact">
-        Find us
+        Contact
       </SpringLink>
     </StyledNav>
   )
