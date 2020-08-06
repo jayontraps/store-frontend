@@ -10,7 +10,7 @@ const StyledAddToCartButton = styled.button`
   position: relative;
   border: none;
   outline: none;
-  background-color: ${({ theme }) => theme.colors.slate};
+  background-color: ${({ theme }) => theme.colors.active};
   padding: 1rem 3rem;
   color: white;
   font-size: 1rem;
@@ -18,10 +18,10 @@ const StyledAddToCartButton = styled.button`
   width: 240px;
   height: 50px;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.slateTrans};
+    background-color: ${({ theme }) => theme.colors.active};
   }
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.slateTrans};
+    background-color: ${({ theme }) => theme.colors.active};
   }
 `
 

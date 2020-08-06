@@ -41,7 +41,7 @@ const StyledSetQuantity = styled.div`
     width: 160px;
     padding: 1rem 45px;
     text-align: center;
-    color: ${({ isLoading }) => (isLoading ? `lightgrey` : "inherit")};
+    color: ${({ theme }) => theme.colors.primary};
   }
   svg {
     font-size: 1rem;

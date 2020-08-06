@@ -7,7 +7,7 @@ import { formatPrice } from "../../utils/formatPrice"
 const StyledCard = styled(SpringLink)`
   display: block;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.primary};
+  color: inherit;
   .product_card__title,
   .product__price {
     margin-bottom: 0.5rem;

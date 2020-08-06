@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
 import { animated } from "react-spring"
 import CloseIcon from "@material-ui/icons/Close"
 import { isMobile } from "react-device-detect"
@@ -18,8 +18,8 @@ import Checkout from "../Checkout"
 import { SpringLink } from "../react-spring-animation"
 
 const Cart = ({ style, setCartOpen }) => {
-  const [showCheckout, setShowCheckout] = useState(false)
   const { cart, isLoading } = useContext(CartContext)
+
   useScrollFreeze()
 
   return (
@@ -108,14 +108,6 @@ const Cart = ({ style, setCartOpen }) => {
               </h3>
 
               <div className="buy_btn_wrapper">
-                {/* <button
-                  onClick={() => {
-                    setShowCheckout(true)
-                  }}
-                  className="buy_btn button btn_icon"
-                >
-                  Checkout
-                </button> */}
                 <SpringLink
                   to={"/checkout"}
                   className="buy_btn button btn_icon"
@@ -126,7 +118,7 @@ const Cart = ({ style, setCartOpen }) => {
             </div>
           </>
         )}
-        {showCheckout && <Checkout cart={cart} />}
+
         {cart.length < 1 && <p>No items in your basket</p>}
       </StyledCart>
     </animated.div>

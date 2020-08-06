@@ -117,8 +117,9 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
     price,
     images,
     images: [firstImage],
+    thumbnail,
   } = data
-
+  console.log("thumbnail: ", thumbnail)
   const firstSet = {
     small: firstImage.imageFile.childImageSharp.small.src,
     large: firstImage.imageFile.childImageSharp.large.src,
@@ -127,7 +128,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
 
   return (
-    <Layout>
+    <Layout bgColor="dark">
       <StyledProduct className="product">
         <div className="column product__images">
           <div className="main__image">
@@ -172,7 +173,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
           <h1 className="product__title">{name}</h1>
           <p className="product__price">{formatPrice(price)}</p>
           <p className="product__desc">{description}</p>
-          <AddToCart {...{ data }} />
+          <AddToCart bgColor="dark" {...{ data }} />
         </div>
       </StyledProduct>
     </Layout>

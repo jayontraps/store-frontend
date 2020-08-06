@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 const CatalogTemplate = ({ data }) => {
   const { strapiRange } = data
   return (
-    <Layout>
+    <Layout bgColor="dark">
       <SEO title={strapiRange.title} />
       <ProductList title={strapiRange.title} products={strapiRange.products} />
     </Layout>

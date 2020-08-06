@@ -23,7 +23,8 @@ const theme = {
     easing: "ease-out",
   },
   colors: {
-    bgColor: "#F8E1B6",
+    bgColor: "#F8E1B6", // F8E1B6
+    bgColorDark: "#20232f",
     bgColorLight: "#FFF0D4",
     primary: "#17181A",
     slate: "#20232f",
@@ -37,6 +38,7 @@ const theme = {
     dark_blue: "#053551",
     red: "#410C12",
     pink: "#CE917E",
+    disabled: "whitesmoke",
     checkout: {
       bgColor: "rgba(255, 255, 255, 0.4)", // #7795f8
       placeholder: "rgba(0, 0, 0, 0.25)", // #7795f8

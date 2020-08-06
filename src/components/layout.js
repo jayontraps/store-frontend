@@ -13,10 +13,18 @@ const StyledLayout = styled.div`
   min-height: 100vh;
   padding-top: ${({ withHero }) => (withHero ? "0px" : "60px")};
   width: 100vw;
-  background-color: ${({ theme }) => theme.colors.bgColor};
+  background-color: ${({ theme, bgColor }) =>
+    bgColor === "dark" ? theme.colors.bgColorDark : theme.colors.bgColor};
+  color: ${({ theme, bgColor }) =>
+    bgColor === "dark" ? "white" : theme.colors.primary};
 `
 
-const Layout = ({ children, withHero = false, isHomePage = false }) => {
+const Layout = ({
+  children,
+  withHero = false,
+  isHomePage = false,
+  bgColor,
+}) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -35,7 +43,9 @@ const Layout = ({ children, withHero = false, isHomePage = false }) => {
         siteTitle={data.site.siteMetadata.title}
       />
       <PageTransition>
-        <StyledLayout withHero={withHero}>{children}</StyledLayout>
+        <StyledLayout {...{ bgColor }} withHero={withHero}>
+          {children}
+        </StyledLayout>
         <Footer />
       </PageTransition>
     </>

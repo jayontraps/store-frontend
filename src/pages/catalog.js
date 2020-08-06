@@ -38,7 +38,7 @@ const Catalog = () => {
   const prods = data.products.nodes.map((prod) => prod)
 
   return (
-    <Layout>
+    <Layout bgColor="dark">
       <ProductList title="All Coasters" products={prods} />
     </Layout>
   )

@@ -8,13 +8,14 @@ const StyledFooter = styled.footer`
   position: relative;
   width: 100vw;
   background-color: ${({ theme }) => theme.colors.slate};
+  padding: 1rem 0;
 `
 
 const Section = styled.div`
   margin: 0 auto;
   background-color: ${({ theme }) => theme.colors.slate};
   color: white;
-  padding: 3rem 0;
+  padding: 1rem 0;
   width: ${({ theme }) => theme.layout.width};
   max-width: ${({ theme }) => theme.layout.maxWidth};
   display: flex;
@@ -56,37 +57,45 @@ const FooterLinks = styled.ul`
   }
 `
 
-const Footer = () => (
-  <StyledFooter>
-    <Section>
-      <FooterLinks>
-        <li>
-          <SpringLink to="/about">About us</SpringLink>
-        </li>
-        <li>
-          <SpringLink to="/postage-and-delivery">
-            Postage and Delivery
-          </SpringLink>
-        </li>
+const Footer = () => {
+  const today = new Date()
+  const year = today.getFullYear()
+  return (
+    <StyledFooter>
+      <Section>
+        <FooterLinks>
+          <li>
+            <SpringLink to="/about">About us</SpringLink>
+          </li>
+          <li>
+            <SpringLink to="/postage-and-delivery">
+              Postage and Delivery
+            </SpringLink>
+          </li>
 
-        <li>
-          <SpringLink to="/contact">Contact us</SpringLink>
-        </li>
-      </FooterLinks>
-      <SocialList>
-        <li>
-          <a href="/">
-            <FacebookIcon />
-          </a>
-        </li>
-        <li>
-          <a href="/">
-            <InstagramIcon />
-          </a>
-        </li>
-      </SocialList>
-    </Section>
-  </StyledFooter>
-)
+          <li>
+            <SpringLink to="/contact">Contact us</SpringLink>
+          </li>
+        </FooterLinks>
+        <SocialList>
+          <li>
+            <a href="/">
+              <FacebookIcon />
+            </a>
+          </li>
+          <li>
+            <a href="/">
+              <InstagramIcon />
+            </a>
+          </li>
+        </SocialList>
+      </Section>
+      <Section>
+        &copy;{" "}
+        {`Copyright 2008-${year} Ply Coasters - beautiful handmade coasters...`}
+      </Section>
+    </StyledFooter>
+  )
+}
 
 export default Footer
