@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 import { isMobile } from "react-device-detect"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Collections from "../components/Collections"
+// import Collections from "../components/Collections"
 import Hero from "../components/Hero"
 import LeadModule from "../components/LeadModule"
 
@@ -46,12 +46,10 @@ const IndexPage = () => {
       <Container>
         <LeadModule
           image={data.image2.sharp.fluid}
-          title="Handmade vintage flavour hipster retro maps Minim ullamco"
-          intro="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-              officiis incidunt officia, aliquid beatae reiciendis doloribus
-              consequuntur voluptas similique inventore molestias."
+          title="Site under construction!"
+          intro="Thank you for your patience. Our new store will be opening in the near future. Please check back soon..."
         />
-        <Collections />
+        {/* <Collections /> */}
       </Container>
     </Layout>
   )

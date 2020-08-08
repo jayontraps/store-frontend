@@ -1,7 +1,7 @@
 import React from "react"
-import { SpringLink } from "../react-spring-animation"
-import FacebookIcon from "@material-ui/icons/Facebook"
-import InstagramIcon from "@material-ui/icons/Instagram"
+// import { SpringLink } from "../react-spring-animation"
+// import FacebookIcon from "@material-ui/icons/Facebook"
+// import InstagramIcon from "@material-ui/icons/Instagram"
 import styled from "@emotion/styled"
 
 const StyledFooter = styled.footer`
@@ -25,24 +25,24 @@ const Section = styled.div`
   }
 `
 
-const SocialList = styled.ul`
-  border-left: 1px solid rgba(255, 255, 255, 0.5);
-  padding-left: 0;
-  display: flex;
-  li {
-    margin-left: 1rem;
-  }
-  a {
-    display: block;
-    width: 2.5rem;
-    height: 2.5rem;
-    svg {
-      width: 100%;
-      height: 100%;
-      fill: #fff;
-    }
-  }
-`
+// const SocialList = styled.ul`
+//   border-left: 1px solid rgba(255, 255, 255, 0.5);
+//   padding-left: 0;
+//   display: flex;
+//   li {
+//     margin-left: 1rem;
+//   }
+//   a {
+//     display: block;
+//     width: 2.5rem;
+//     height: 2.5rem;
+//     svg {
+//       width: 100%;
+//       height: 100%;
+//       fill: #fff;
+//     }
+//   }
+// `
 
 const FooterLinks = styled.ul`
   margin-right: 1rem;
@@ -62,7 +62,7 @@ const Footer = () => {
   const year = today.getFullYear()
   return (
     <StyledFooter>
-      <Section>
+      {/* <Section>
         <FooterLinks>
           <li>
             <SpringLink to="/about">About us</SpringLink>
@@ -89,7 +89,7 @@ const Footer = () => {
             </a>
           </li>
         </SocialList>
-      </Section>
+      </Section> */}
       <Section>
         &copy;{" "}
         {`Copyright 2008-${year} Ply Coasters - beautiful handmade coasters...`}
