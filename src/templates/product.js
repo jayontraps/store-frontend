@@ -49,7 +49,7 @@ const StyledProduct = styled.div`
 
     .main__image {
       margin-bottom: 1rem;
-      max-width: 500px;
+      max-width: 550px;
     }
   }
 
@@ -148,30 +148,32 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
           </div>
           <StyledThumbnailNav>
             <ul>
-              {images.map((image, index) => {
-                const isActiveClass = index === activeImageIndex ? "active" : ""
-                return (
-                  <li
-                    onClick={() => {
-                      const newImage = {
-                        small:
-                          images[index].imageFile.childImageSharp.small.src,
-                        large:
-                          images[index].imageFile.childImageSharp.large.src,
-                      }
-                      setActiveImage(newImage)
-                      setActiveImageIndex(index)
-                    }}
-                    key={index}
-                  >
-                    <img
-                      className={isActiveClass}
-                      src={image.imageFile.childImageSharp.small.src}
-                      alt=""
-                    />
-                  </li>
-                )
-              })}
+              {images.length > 1 &&
+                images.map((image, index) => {
+                  const isActiveClass =
+                    index === activeImageIndex ? "active" : ""
+                  return (
+                    <li
+                      onClick={() => {
+                        const newImage = {
+                          small:
+                            images[index].imageFile.childImageSharp.small.src,
+                          large:
+                            images[index].imageFile.childImageSharp.large.src,
+                        }
+                        setActiveImage(newImage)
+                        setActiveImageIndex(index)
+                      }}
+                      key={index}
+                    >
+                      <img
+                        className={isActiveClass}
+                        src={image.imageFile.childImageSharp.small.src}
+                        alt=""
+                      />
+                    </li>
+                  )
+                })}
             </ul>
           </StyledThumbnailNav>
         </div>
@@ -198,7 +200,7 @@ export const query = graphql`
         imageFile {
           id
           childImageSharp {
-            small: fluid(maxWidth: 500) {
+            small: fluid(maxWidth: 550) {
               src
             }
             large: fluid(maxWidth: 1000) {

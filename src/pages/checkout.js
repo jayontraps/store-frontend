@@ -1,14 +1,9 @@
-import React, { useState } from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import { isMobile } from "react-device-detect"
+import React from "react"
 import styled from "@emotion/styled"
-import { useTransition, animated } from "react-spring"
-import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { ZoomIn } from "../components/react-spring-animation"
-import Checkout from "../components/Checkout"
 import theme from "../theme/theme"
+import Checkout from "../components/Checkout"
 
 const {
   mq: { medium, small },

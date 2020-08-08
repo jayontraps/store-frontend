@@ -164,6 +164,7 @@ const CheckoutForm = () => {
   const [success, setSuccess] = useState(null)
   const [order, setOrder] = useState(null)
   const [cardIsInvalid, setCardIsInvalid] = useState(false)
+  const isBrowser = typeof window !== "undefined"
 
   const handleSubmit = async (values, { setSubmitting }) => {
     if (!stripe || !elements) {
@@ -215,6 +216,13 @@ const CheckoutForm = () => {
     clearCart()
     setSubmitting(false)
     setSuccess(true)
+    if (isBrowser) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      })
+    }
   }
 
   useEffect(() => {
