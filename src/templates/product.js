@@ -49,6 +49,7 @@ const StyledProduct = styled.div`
 
     .main__image {
       margin-bottom: 1rem;
+      max-width: 500px;
     }
   }
 
@@ -79,6 +80,11 @@ const StyledThumbnailNav = styled.nav`
         cursor: pointer;
       }
     }
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
   }
 
   ${small} {
@@ -119,7 +125,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
     images: [firstImage],
     thumbnail,
   } = data
-  console.log("thumbnail: ", thumbnail)
+
   const firstSet = {
     small: firstImage.imageFile.childImageSharp.small.src,
     large: firstImage.imageFile.childImageSharp.large.src,
@@ -160,7 +166,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
                   >
                     <img
                       className={isActiveClass}
-                      src={image.imageFile.childImageSharp.thumb.src}
+                      src={image.imageFile.childImageSharp.small.src}
                       alt=""
                     />
                   </li>
@@ -192,22 +198,12 @@ export const query = graphql`
         imageFile {
           id
           childImageSharp {
-            thumb: fluid(maxWidth: 80, maxHeight: 80) {
-              ...GatsbyImageSharpFluid_withWebp
+            small: fluid(maxWidth: 500) {
+              src
             }
-            small: fluid(maxWidth: 500, maxHeight: 500) {
-              ...GatsbyImageSharpFluid_withWebp
+            large: fluid(maxWidth: 1000) {
+              src
             }
-            large: fluid(maxWidth: 1000, maxHeight: 1000) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-      }
-      thumbnail {
-        childImageSharp {
-          fluid(maxWidth: 400) {
-            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }

@@ -20,16 +20,6 @@ const Catalog = () => {
               }
             }
           }
-          images {
-            imageFile {
-              id
-              childImageSharp {
-                fluid(maxWidth: 400, maxHeight: 400) {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-          }
         }
       }
     }

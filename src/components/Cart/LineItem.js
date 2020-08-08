@@ -77,7 +77,7 @@ const LineItem = ({ isLoading, item }) => {
       <div className="line-item__col">
         <img
           className="line-item__img"
-          src={item.thumbnail.childImageSharp.fluid.src}
+          src={item.images[0].imageFile.childImageSharp.small.src}
           alt=""
         />
       </div>

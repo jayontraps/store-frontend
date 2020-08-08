@@ -72,19 +72,9 @@ export const query = graphql`
         description
         price
         slug
-        images {
-          imageFile {
-            id
-            childImageSharp {
-              fluid(maxWidth: 1200) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        }
         thumbnail {
           childImageSharp {
-            fluid(maxWidth: 400) {
+            fluid(maxWidth: 500) {
               ...GatsbyImageSharpFluid_withWebp
             }
           }

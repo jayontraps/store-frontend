@@ -20,13 +20,6 @@ export const query = graphql`
   query($slug: String!) {
     strapiRange(slug: { eq: $slug }) {
       title
-      image {
-        childImageSharp {
-          fluid(maxWidth: 1800) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
-        }
-      }
       products {
         id
         name
@@ -35,18 +28,8 @@ export const query = graphql`
         price
         thumbnail {
           childImageSharp {
-            fluid(maxWidth: 400) {
+            fluid(maxWidth: 500) {
               ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-        images {
-          id
-          imageFile {
-            childImageSharp {
-              fluid(maxWidth: 400, maxHeight: 400) {
-                ...GatsbyImageSharpFluid_withWebp
-              }
             }
           }
         }
