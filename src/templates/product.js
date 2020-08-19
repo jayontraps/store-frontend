@@ -6,6 +6,7 @@ import {
   MOUSE_ACTIVATION,
   TOUCH_ACTIVATION,
 } from "react-image-magnifiers"
+import ReactMarkdown from "react-markdown"
 import AddToCart from "../components/Cart/AddToCart"
 import Layout from "../components/layout"
 import { formatPrice } from "../utils/formatPrice"
@@ -57,8 +58,19 @@ const StyledProduct = styled.div`
     margin-bottom: 1rem;
   }
 
+  .product__desc {
+    margin: 1rem 0;
+    h3 {
+      font-size: 1rem;
+    }
+    ul {
+      padding-left: 1rem;
+    }
+  }
+
   .product__price {
     font-weight: bold;
+    font-size: 1.25rem;
   }
 `
 
@@ -141,7 +153,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
     const productHeight = !height ? 100 : height
     return (
       <p className="product__sizes">
-        Sizes: {productWidth}
+        Size: {productWidth}
         <span style={{ fontSize: " 0.8rem" }}>mm</span> x {productHeight}
         <span style={{ fontSize: "0.8rem" }}>mm</span>
       </p>
@@ -197,10 +209,13 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
           <p className="product__price">{formatPrice(price)}</p>
           <p className="product__number_in_set">
             {`Set of ${number_in_set ? number_in_set : 6}`} {product_type_title}
-            s.
+            s
           </p>
           {renderSizes()}
-          <p className="product__desc">{description}</p>
+          <div className="product__desc">
+            <ReactMarkdown source={description} />
+          </div>
+
           <AddToCart bgColor="dark" {...{ data }} />
         </div>
       </StyledProduct>

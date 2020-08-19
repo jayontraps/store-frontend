@@ -13,6 +13,10 @@ const Catalog = () => {
           price
           slug
           description
+          number_in_set
+          product_type {
+            title
+          }
           thumbnail {
             childImageSharp {
               fluid {

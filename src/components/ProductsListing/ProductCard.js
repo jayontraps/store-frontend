@@ -16,14 +16,20 @@ const StyledCard = styled(SpringLink)`
     margin-bottom: 1rem;
   }
   .product__price {
-    font-weight: bold;
   }
   .product_card__title {
     font-size: 1.25rem;
   }
 `
 const ProductCard = ({ product }) => {
-  const { thumbnail, name, slug, price } = product
+  const {
+    thumbnail,
+    name,
+    slug,
+    price,
+    product_type: { title: product_type_title },
+    number_in_set,
+  } = product
 
   return (
     <StyledCard
@@ -36,6 +42,7 @@ const ProductCard = ({ product }) => {
         fluid={thumbnail.childImageSharp.fluid}
       />
       <h3 className="product_card__title">{name}</h3>
+      <p className="product__details">{`Set of ${number_in_set} ${product_type_title}s`}</p>
       <p className="product__price">{formatPrice(price)}</p>
     </StyledCard>
   )

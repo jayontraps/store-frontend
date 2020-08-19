@@ -52,7 +52,7 @@ const AddToCart = ({ data }) => {
   const action = added ? "Added" : "Add"
   return (
     <>
-      <Quantity {...{ quantity, setQuantity }} />
+      <Quantity showTitle={false} {...{ quantity, setQuantity }} />
       <StyledAddToCartButton
         className="button"
         onClick={() => add({ data, quantity })}

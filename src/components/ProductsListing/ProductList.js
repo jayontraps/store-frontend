@@ -67,7 +67,7 @@ const StyledProductList = styled.div`
   }
 
   .product-grid {
-    padding-bottom: 2rem;
+    padding-bottom: 4rem;
     width: calc(100% - 2rem);
     margin: 0 auto;
     max-width: ${({ theme }) => theme.layout.maxWidth};

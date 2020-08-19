@@ -26,6 +26,7 @@ export const query = graphql`
         slug
         description
         price
+        number_in_set
         thumbnail {
           childImageSharp {
             fluid(maxWidth: 550) {
