@@ -14,9 +14,7 @@ const Catalog = () => {
           slug
           description
           number_in_set
-          product_type {
-            title
-          }
+          itemType
           thumbnail {
             childImageSharp {
               fluid {

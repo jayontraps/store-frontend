@@ -135,7 +135,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
     price,
     images,
     number_in_set,
-    product_type: { title: product_type_title = "coaster" },
+    itemType,
     width,
     height,
     images: [firstImage],
@@ -208,8 +208,7 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
           <h1 className="product__title">{name}</h1>
           <p className="product__price">{formatPrice(price)}</p>
           <p className="product__number_in_set">
-            {`Set of ${number_in_set ? number_in_set : 6}`} {product_type_title}
-            s
+            {`Set of ${number_in_set ? number_in_set : 6} ${itemType}s`}
           </p>
           {renderSizes()}
           <div className="product__desc">
@@ -232,9 +231,7 @@ export const query = graphql`
       description
       price
       number_in_set
-      product_type {
-        title
-      }
+      itemType
       width
       height
       images {
