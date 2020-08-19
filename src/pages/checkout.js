@@ -2,12 +2,7 @@ import React from "react"
 import styled from "@emotion/styled"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import theme from "../theme/theme"
 import Checkout from "../components/Checkout"
-
-const {
-  mq: { medium, small },
-} = theme
 
 const StyledContent = styled.div`
   width: 95%;

@@ -54,17 +54,21 @@ const StyledTitle = styled.div`
   left: 0;
   z-index: 1;
 
-  h1 {
+  h1,
+  h3 {
     width: calc(100% - 2rem);
     max-width: ${({ theme }) => theme.layout.maxWidth};
     margin: 0 auto;
     text-align: center;
     line-height: 1.2;
     color: white;
-    font-size: 3rem;
     ${tabletLandscapeUp} {
       text-align: left;
     }
+  }
+
+  h1 {
+    font-size: 3rem;
   }
 `
 
@@ -78,7 +82,13 @@ const HeroFrameObserved = styled.div`
 
 const isBrowser = typeof window !== "undefined"
 
-const Hero = ({ image, vhValue = 94, title, isHomePage = false }) => {
+const Hero = ({
+  image,
+  vhValue = 94,
+  title,
+  description,
+  isHomePage = false,
+}) => {
   const { setScrolledBellowHero } = useContext(HeroContext)
 
   const [ref, entry] = useIntersect({})
@@ -125,6 +135,7 @@ const Hero = ({ image, vhValue = 94, title, isHomePage = false }) => {
         {title && !isHomePage && (
           <StyledTitle>
             <h1>{title}</h1>
+            {description && <h3>{description}</h3>}
           </StyledTitle>
         )}
       </StyledHero>

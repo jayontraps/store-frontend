@@ -8,14 +8,13 @@ import StyledCart from "./StyledCart"
 import { useScrollFreeze } from "../../hooks"
 import LoadingSpinner from "../LoadingSpinner"
 import { formatPrice } from "../../utils/formatPrice"
+import { SpringLink } from "../react-spring-animation"
 import {
   cartSubtotal,
   cartTotal,
   shouldPayShipping,
   SHIPPING_RATE,
 } from "../../utils/cart"
-import Checkout from "../Checkout"
-import { SpringLink } from "../react-spring-animation"
 
 const Cart = ({ style, setCartOpen }) => {
   const { cart, isLoading } = useContext(CartContext)
@@ -67,8 +66,6 @@ const Cart = ({ style, setCartOpen }) => {
             </div>
 
             <div className="cart__footer">
-              {/* <Coupon {...{ checkout, checkCoupon, removeCoupon }} /> */}
-
               <h5 className="total__title">
                 Sub Total:{" "}
                 <span className="total__price">

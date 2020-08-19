@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 import { isMobile } from "react-device-detect"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-// import Collections from "../components/Collections"
+import Collections from "../components/Collections"
 import Hero from "../components/Hero"
 import LeadModule from "../components/LeadModule"
 
@@ -46,10 +46,10 @@ const IndexPage = () => {
       <Container>
         <LeadModule
           image={data.image2.sharp.fluid}
-          title="Site under construction!"
-          intro="Thank you for your patience. Our new store will be opening in the near future. Please check back soon..."
+          title="Vintage map plywood and cork coasters and table mats"
+          intro="Unique homeware gifts made in the UK. Choose from FSC Plywood coasters handmade from original recycled maps and discarded books or printed cork matching sets."
         />
-        {/* <Collections /> */}
+        <Collections />
       </Container>
     </Layout>
   )

@@ -1,9 +1,8 @@
-import React, { useState, useContext } from "react"
+import React, { useState } from "react"
 import styled from "@emotion/styled"
 import { graphql } from "gatsby"
 import {
   Magnifier,
-  SideBySideMagnifier,
   MOUSE_ACTIVATION,
   TOUCH_ACTIVATION,
 } from "react-image-magnifiers"
@@ -109,9 +108,10 @@ const StyledThumbnailNav = styled.nav`
   }
 
   img {
-    border: 2px solid ${({ theme }) => theme.colors.bgColor};
+    border: 2px solid ${({ theme }) => theme.colors.slate};
+    border-radius: 10px;
     &.active {
-      border-color: ${({ theme }) => theme.colors.slate};
+      border-color: ${({ theme }) => theme.colors.active};
     }
   }
 `
@@ -122,8 +122,11 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
     description,
     price,
     images,
+    number_in_set,
+    product_type: { title: product_type_title = "coaster" },
+    width,
+    height,
     images: [firstImage],
-    thumbnail,
   } = data
 
   const firstSet = {
@@ -132,6 +135,18 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
   }
   const [activeImage, setActiveImage] = useState(firstSet)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+
+  const renderSizes = () => {
+    const productWidth = !width ? 100 : width
+    const productHeight = !height ? 100 : height
+    return (
+      <p className="product__sizes">
+        Sizes: {productWidth}
+        <span style={{ fontSize: " 0.8rem" }}>mm</span> x {productHeight}
+        <span style={{ fontSize: "0.8rem" }}>mm</span>
+      </p>
+    )
+  }
 
   return (
     <Layout bgColor="dark">
@@ -180,6 +195,11 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
         <div className="column product__details">
           <h1 className="product__title">{name}</h1>
           <p className="product__price">{formatPrice(price)}</p>
+          <p className="product__number_in_set">
+            {`Set of ${number_in_set ? number_in_set : 6}`} {product_type_title}
+            s.
+          </p>
+          {renderSizes()}
           <p className="product__desc">{description}</p>
           <AddToCart bgColor="dark" {...{ data }} />
         </div>
@@ -196,6 +216,12 @@ export const query = graphql`
       name
       description
       price
+      number_in_set
+      product_type {
+        title
+      }
+      width
+      height
       images {
         imageFile {
           id

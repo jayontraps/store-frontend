@@ -48,6 +48,7 @@ const Collections = ({ style }) => {
         nodes {
           slug
           title
+          description
           image {
             childImageSharp {
               fluid(maxWidth: 400) {
@@ -60,54 +61,15 @@ const Collections = ({ style }) => {
     }
   `)
 
-  const corkCollection = ["Cork coasters", "Cork placemats"].map(
-    (title) =>
-      data.allStrapiRange.nodes.filter((node) => node.title === title)[0]
-  )
-
-  const plyCollection = [
-    "Ply Map Coasters",
-    "Ply Map Placemats",
-    "Miscellaneous Ply coasters",
-  ].map(
+  const col = ["Cork", "Plywood"].map(
     (title) =>
       data.allStrapiRange.nodes.filter((node) => node.title === title)[0]
   )
 
   return (
     <StyledCollections className={`collection`}>
-      <CollectionCard
-        delay={0}
-        className={`item__1`}
-        collection={corkCollection[0]}
-      />
-
-      <CollectionCard
-        delay={0}
-        className={`item__2`}
-        collection={corkCollection[1]}
-      />
-
-      <CollectionCard
-        withTranslate
-        delay={80}
-        className={`item__3`}
-        collection={plyCollection[0]}
-      />
-
-      <CollectionCard
-        withTranslate
-        delay={160}
-        className={`item__4`}
-        collection={plyCollection[1]}
-      />
-
-      <CollectionCard
-        withTranslate
-        delay={240}
-        className={`item__5`}
-        collection={plyCollection[2]}
-      />
+      <CollectionCard delay={0} className={`item__1`} collection={col[0]} />
+      <CollectionCard delay={0} className={`item__2`} collection={col[1]} />
     </StyledCollections>
   )
 }

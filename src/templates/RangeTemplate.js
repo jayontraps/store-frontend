@@ -36,6 +36,7 @@ const RangeTemplate = ({ data }) => {
   const {
     products,
     title,
+    description,
     image: {
       childImageSharp: { fluid },
     },
@@ -44,7 +45,12 @@ const RangeTemplate = ({ data }) => {
   return (
     <Layout withHero>
       <SEO title={title} />
-      <Hero {...{ vhValue }} title={title} image={fluid} />
+      <Hero
+        {...{ vhValue }}
+        title={title}
+        description={description}
+        image={fluid}
+      />
 
       <Container>
         <ProductGrid products={products} />
@@ -59,6 +65,7 @@ export const query = graphql`
   query($slug: String!) {
     strapiRange(slug: { eq: $slug }) {
       title
+      description
       image {
         childImageSharp {
           fluid(maxWidth: 1800) {

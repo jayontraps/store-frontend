@@ -4,7 +4,7 @@ import styled from "@emotion/styled"
 import globalStyles from "../theme/global"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-// import Header from "./Header/header.js"
+import Header from "./Header/header.js"
 import Footer from "./Footer/footer"
 import { PageTransition } from "./react-spring-animation"
 
@@ -38,10 +38,10 @@ const Layout = ({
   return (
     <>
       <Global styles={globalStyles} />
-      {/* <Header
+      <Header
         {...{ withHero, isHomePage }}
         siteTitle={data.site.siteMetadata.title}
-      /> */}
+      />
       <PageTransition>
         <StyledLayout {...{ bgColor }} withHero={withHero}>
           {children}
