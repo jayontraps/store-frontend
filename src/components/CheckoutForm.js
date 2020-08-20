@@ -161,6 +161,7 @@ const CheckoutForm = () => {
   const [token, setToken] = useState(null)
   const [total, setTotal] = useState("loading")
   const [loading, setLoading] = useState(false)
+  const [initialLoading, setInitialLoading] = useState(false)
   const [success, setSuccess] = useState(null)
   const [order, setOrder] = useState(null)
   const [cardIsInvalid, setCardIsInvalid] = useState(false)
@@ -228,6 +229,7 @@ const CheckoutForm = () => {
   useEffect(() => {
     const loadToken = async () => {
       setLoading(true)
+      setInitialLoading(true)
       const response = await fetch(`${API_URL}/orders/payment`, {
         method: "POST",
         headers: {
@@ -247,12 +249,15 @@ const CheckoutForm = () => {
       setToken(data.client_secret)
       setTotal(data.amount)
       setLoading(false)
+      setInitialLoading(false)
     }
 
     loadToken()
   }, [cart])
 
-  return (
+  return initialLoading ? (
+    <LoadingSpinner style={{ width: "40px", height: "40px" }} />
+  ) : (
     <StyledContainer
       style={{
         position: "relative",

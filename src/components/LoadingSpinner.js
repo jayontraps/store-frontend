@@ -38,8 +38,8 @@ const StyledLoader = styled.div`
   }
 `
 
-const LoadingSpinner = ({ colorModer = "dark" }) => {
-  return <StyledLoader {...{ colorModer }} />
+const LoadingSpinner = ({ colorModer = "dark", style }) => {
+  return <StyledLoader {...{ colorModer, style }} />
 }
 
 export default LoadingSpinner
