@@ -17,7 +17,7 @@ const Catalog = () => {
           itemType
           thumbnail {
             childImageSharp {
-              fluid {
+              fluid(maxWidth: 550) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
