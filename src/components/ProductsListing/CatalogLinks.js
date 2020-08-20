@@ -18,14 +18,14 @@ const CatalogLinks = ({ className }) => {
   return allStrapiRange.nodes.length > 0 ? (
     <nav {...{ className }}>
       <ul>
-        <li>
-          <SpringLink to={`/catalog`}>All Coasters</SpringLink>
-        </li>
         {allStrapiRange.nodes.map((range) => (
           <li key={range.id}>
             <SpringLink to={`/catalog/${range.slug}`}>{range.title}</SpringLink>
           </li>
         ))}
+        <li>
+          <SpringLink to={`/catalog`}>All products</SpringLink>
+        </li>
       </ul>
     </nav>
   ) : null

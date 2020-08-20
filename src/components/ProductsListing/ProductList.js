@@ -7,7 +7,7 @@ import DropdownMenu from "../DropdownMenu"
 import theme from "../../theme/theme"
 
 const {
-  mq: { small, medium },
+  mq: { small, tabletLandscapeUp },
 } = theme
 
 const StyledProductList = styled.div`
@@ -25,6 +25,7 @@ const StyledProductList = styled.div`
     text-align: center;
     padding: 2rem;
     line-height: 1em;
+    font-size: 2rem;
   }
 
   ${small} {
@@ -47,7 +48,7 @@ const StyledProductList = styled.div`
   }
 
   .prod__links {
-    ${medium} {
+    ${tabletLandscapeUp} {
       position: absolute;
       left: 1rem;
       top: 50%;
@@ -57,7 +58,7 @@ const StyledProductList = styled.div`
 
   .prod__count {
     display: inline-block;
-    ${medium} {
+    ${tabletLandscapeUp} {
       position: absolute;
       right: 1rem;
       top: 50%;

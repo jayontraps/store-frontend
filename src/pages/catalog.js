@@ -31,7 +31,7 @@ const Catalog = () => {
 
   return (
     <Layout bgColor="dark">
-      <ProductList title="All Coasters" products={prods} />
+      <ProductList title="All Coasters and Placemats" products={prods} />
     </Layout>
   )
 }

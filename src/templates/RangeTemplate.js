@@ -14,16 +14,16 @@ const {
 const vhValue = 66.66
 
 const Container = styled.div`
-  min-height: 100vh;
+  min-height: 80vh;
   overflow-y: hidden;
   width: 100vw;
   position: relative;
   z-index: 9999;
   background-color: ${({ theme }) => theme.colors.bgColor};
   .product-grid {
-    padding-top: ${({ theme }) => theme.spacing.gridGap};
+    padding: ${({ theme }) => theme.spacing.gridGap} 0;
     ${tabletLandscapeUp} {
-      padding-top: ${({ theme }) => theme.spacing.section};
+      padding: ${({ theme }) => theme.spacing.section} 0;
     }
     width: calc(100% - 2rem);
     margin: 0 auto;
