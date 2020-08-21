@@ -5,12 +5,13 @@ import SEO from "../components/seo"
 
 const StyledContent = styled.div`
   width: 95%;
-  max-width: ${({ theme }) => theme.layout.innerWidth};
+  max-width: ${({ theme }) => theme.layout.maxWidth};
   margin: 2rem auto;
   h1,
   p,
   h3 {
     margin-bottom: 1rem;
+    max-width: ${({ theme }) => theme.layout.maxLineLength};
   }
 `
 

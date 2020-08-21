@@ -12,6 +12,7 @@ const theme = {
     maxWidth: "1100px",
     productWidth: "1080px",
     leaderWidth: "800px",
+    maxLineLength: "700px",
     width: "95%",
   },
   spacing: {
@@ -31,6 +32,7 @@ const theme = {
     slateTrans: "rgba(32, 35, 47, 0.4)",
     darkSlate: "#1f1919",
     active: "#FF9F00",
+    activeDark: "#804F00",
     borderColor: "rgba(75, 75, 75, .25)",
     dark_green: "#155147",
     dark_green_grey: "#454E4C",

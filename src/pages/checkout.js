@@ -6,8 +6,7 @@ import Checkout from "../components/Checkout"
 
 const StyledContent = styled.div`
   width: 95%;
-  min-height: 100vh;
-  max-width: ${({ theme }) => theme.layout.innerWidth};
+  max-width: ${({ theme }) => theme.layout.maxWidth};
   margin: 2rem auto;
 `
 

@@ -14,15 +14,22 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.bgColor};
 `
 
+const StyledImageCredit = styled.span`
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+`
+
 const StyledContent = styled.div`
   width: 95%;
-  max-width: ${({ theme }) => theme.layout.innerWidth};
+  max-width: ${({ theme }) => theme.layout.maxWidth};
   margin: 2rem auto;
   position: relative;
   background-color: ${({ theme }) => theme.colors.bgColor};
   p,
   h1 {
     margin-bottom: 1rem;
+    max-width: ${({ theme }) => theme.layout.maxLineLength};
   }
   a,
   a::visited {
@@ -72,6 +79,15 @@ const About = () => {
             .
           </p>
         </StyledContent>
+        <StyledImageCredit>
+          <a
+            href="https://www.dylancollard.com/"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Image by Dylan Collard
+          </a>
+        </StyledImageCredit>
       </Container>
     </Layout>
   )

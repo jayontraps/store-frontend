@@ -1,5 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "@emotion/styled"
+import { CartContext } from "../context/CartContext"
 import { graphql } from "gatsby"
 import {
   Magnifier,
@@ -10,6 +11,7 @@ import ReactMarkdown from "react-markdown"
 import AddToCart from "../components/Cart/AddToCart"
 import Layout from "../components/layout"
 import { formatPrice } from "../utils/formatPrice"
+import { SpringLink } from "../components/react-spring-animation"
 import theme from "../theme/theme"
 
 const {
@@ -71,6 +73,30 @@ const StyledProduct = styled.div`
   .product__price {
     font-weight: bold;
     font-size: 1.25rem;
+  }
+
+  .checkout_btn {
+    text-decoration: none;
+    margin-top: 1rem;
+    appearance: none;
+    display: block;
+    text-align: center;
+    border: 2px solid ${({ theme }) => theme.colors.active};
+    outline: none;
+    background-color: transparent;
+    padding: 1rem 3rem;
+    color: white;
+    transition: background-color 150ms;
+    width: 260px;
+    height: 50px;
+    font-size: 1rem;
+    line-height: 1rem;
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.active};
+    }
+    &:disabled {
+      background-color: ${({ theme }) => theme.colors.active};
+    }
   }
 `
 
@@ -140,6 +166,8 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
     height,
     images: [firstImage],
   } = data
+
+  const { cart } = useContext(CartContext)
 
   const firstSet = {
     small: firstImage.imageFile.childImageSharp.small.src,
@@ -216,6 +244,11 @@ const ProductTemplate = ({ data: { strapiProduct: data } }) => {
           </div>
 
           <AddToCart bgColor="dark" {...{ data }} />
+          {cart.length > 0 && (
+            <SpringLink to={"/checkout"} className="button checkout_btn">
+              Continue to checkout
+            </SpringLink>
+          )}
         </div>
       </StyledProduct>
     </Layout>

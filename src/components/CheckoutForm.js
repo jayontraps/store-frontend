@@ -8,6 +8,7 @@ import { API_URL } from "../utils/url"
 import LoadingSpinner from "./LoadingSpinner"
 
 const StyledContainer = styled.div`
+  max-width: ${({ theme }) => theme.layout.maxLineLength};
   .title {
     margin-bottom: 1rem;
   }
@@ -15,7 +16,7 @@ const StyledContainer = styled.div`
     margin-bottom: 0.25rem;
   }
   .FormGroup {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     padding: 0;
     border-style: none;
     background-color: ${({ theme }) => theme.colors.checkout.bgColor};

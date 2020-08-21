@@ -12,7 +12,6 @@ const StyledLoader = styled.div`
   opacity: 0.8;
   border-radius: 50%;
   animation: loadingSpinner 0.7s infinite linear;
-  -webkit-animation: loadingSpinner 0.7s infinite linear;
   margin-top: calc(-28px / 2);
   margin-left: calc(-28px / 2);
   position: absolute;
@@ -25,15 +24,6 @@ const StyledLoader = styled.div`
     }
     to {
       transform: rotate(360deg);
-    }
-  }
-
-  @-webkit-keyframes loadingSpinner {
-    from {
-      -webkit-transform: rotate(0deg);
-    }
-    to {
-      -webkit-transform: rotate(360deg);
     }
   }
 `

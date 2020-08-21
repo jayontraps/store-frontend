@@ -10,7 +10,7 @@ import { PageTransition } from "./react-spring-animation"
 
 const StyledLayout = styled.div`
   position: relative;
-  min-height: 100vh;
+  min-height: 80vh;
   padding-top: ${({ withHero }) => (withHero ? "0px" : "60px")};
   width: 100vw;
   background-color: ${({ theme, bgColor }) =>

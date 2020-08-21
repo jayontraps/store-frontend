@@ -28,6 +28,11 @@ const globalStyles = () => {
       font-size: 2.5rem;
     }
 
+    a,
+    a:visited {
+      color: ${colors.primary};
+    }
+
     .button {
       appearance: none;
       border: 0;

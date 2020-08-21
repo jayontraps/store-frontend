@@ -14,11 +14,11 @@ const StyledAddToCartButton = styled.button`
   padding: 1rem 3rem;
   color: white;
   font-size: 1rem;
-  transition: transform 150ms;
-  width: 240px;
+  transition: transform, background-color, 150ms;
+  width: 260px;
   height: 50px;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.active};
+    background-color: ${({ theme }) => theme.colors.activeDark};
   }
   &:disabled {
     background-color: ${({ theme }) => theme.colors.active};

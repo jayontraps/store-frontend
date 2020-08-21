@@ -20,6 +20,10 @@ const StyledCard = styled(SpringLink)`
   .product_card__title {
     font-size: 1.25rem;
   }
+
+  &:visited {
+    color: inherit;
+  }
 `
 const ProductCard = ({ product }) => {
   const { thumbnail, name, slug, price, number_in_set, itemType } = product
