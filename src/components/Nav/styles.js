@@ -25,6 +25,9 @@ const StyledNav = styled.nav`
     &.current-page {
       border-bottom: 2px solid #fff;
     }
+    &:visited {
+      color: #fff;
+    }
   }
 `
 

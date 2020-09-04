@@ -53,6 +53,9 @@ const FooterLinks = styled.ul`
     &:hover {
       text-decoration: underline;
     }
+    &:visited {
+      color: #fff;
+    }
   }
 `
 
