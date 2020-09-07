@@ -6,7 +6,10 @@ import ProductList from "../components/ProductsListing/ProductList"
 const Catalog = () => {
   const data = useStaticQuery(graphql`
     query {
-      products: allStrapiProduct(sort: { order: ASC, fields: updated_at }) {
+      products: allStrapiProduct(
+        sort: { order: ASC, fields: updated_at }
+        filter: { range: { slug: { regex: "/plywood|cork/" } } }
+      ) {
         nodes {
           id
           name
